@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+
 const groupSchema = new mongoose.Schema({
     name: {
         type: String,
@@ -6,13 +7,19 @@ const groupSchema = new mongoose.Schema({
         unique: true
     },
     description: {
-        type: String,},
-    createdBy:{
+        type: String,
+    },
+    type: {
+        type: String,
+        enum: ['Travel', 'Home', 'Couple', 'Other'],
+        required: [true, 'Group type is required']
+    },
+    createdBy: {
         type: mongoose.Schema.ObjectId,
         ref: 'User',
         required: true
     },
-    members:[{
+    members: [{
         type: mongoose.Schema.ObjectId,
         ref: 'User',
     }],
