@@ -1,0 +1,57 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:latest
+    container_name: splitbill-mongodb
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_DATABASE: billsplit
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - splitbill-network
+
+  backend:
+    build: ./backened
+    container_name: splitbill-backend
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+      - DATABASE=mongodb://mongodb:27017/billsplit
+      - JWT_SECRET=your-super-long-jwt-secret-key-here-should-be-at-least-32-characters-for-security
+      - JWT_EXPIRES_IN=90d
+      - JWT_COOKIE_EXPIRES_IN=90
+      - PORT=3000
+    depends_on:
+      - mongodb
+    networks:
+      - splitbill-network
+    volumes:
+      - ./backened:/app
+      - /app/node_modules
+
+  frontend:
+    build: ./frontened
+    container_name: splitbill-frontend
+    restart: unless-stopped
+    ports:
+      - "5173:5173"
+    depends_on:
+      - backend
+    networks:
+      - splitbill-network
+    volumes:
+      - ./frontened:/app
+      - /app/node_modules
+
+volumes:
+  mongodb_data:
+
+networks:
+  splitbill-network:
+    driver: bridge
