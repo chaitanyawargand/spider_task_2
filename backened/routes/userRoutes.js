@@ -1,9 +1,8 @@
-const express= require('express');
-const authController=require('./../controllers/authController');
-const userController=require('./../controllers/userController');
-const friendController=require('./../controllers/friendController');
+const express = require('express');
+const authController = require('./../controllers/authController');
+const userController = require('./../controllers/userController');
+const friendController = require('./../controllers/friendsController');
 const router = express.Router();
-
 
 router.post('/signup', authController.signUp);
 router.post('/login', authController.login);
@@ -19,4 +18,9 @@ router.get('/me', userController.getme);
 router.patch('/updateMe', userController.updateMe);
 router.delete('/deleteMe', userController.deleteMe);
 
-router.get('/',friendController.searchUsers);
+// Friend routes
+router.get('/friend/search', friendController.searchUsers);
+router.post('/friend/:id', friendController.addFriend);
+router.delete('/friend/:id', friendController.removeFriend);
+
+module.exports = router;

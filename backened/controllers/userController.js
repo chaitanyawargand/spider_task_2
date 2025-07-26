@@ -1,5 +1,5 @@
-const User = require('./../modals/userschema');
-const catchAsync = require('./../utils/catchAsynch');
+const User = require('./../modals/userSchema');
+const catchAsync = require('./../utils/catchAsync');
 const AppError = require('./../utils/appError');
 const factory = require('./handlerFactory');
 const APIFeatures = require('./../utils/apiFeatures');
