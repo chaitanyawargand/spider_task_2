@@ -1,6 +1,6 @@
-const Group = require('../models/groupModel');
-const User=require('../models/userModel');
-const catchAsync = require('../utils/catchAsync');
+const Group = require('../modals/groupSchema');
+const User=require('../modals/userSchema');
+const catchAsync = require('../utils/catchAsynch');
 const AppError = require('../utils/appError');
 
 exports.createGroup =catchAsync(async (req, res, next) => {
@@ -18,6 +18,7 @@ exports.createGroup =catchAsync(async (req, res, next) => {
         }
     });
 })
+
 exports.addMember= catchAsync(async(req,res,next)=>{
     const groupId= req.params.id;
     const friendId=req.body.friendId;
@@ -58,6 +59,7 @@ exports.addMember= catchAsync(async(req,res,next)=>{
         data: {group}
     });
  });
+
 exports.getGroupMembers = catchAsync(async (req, res, next) => {
     const group=await Group.findById(req.params.id).populate('members','name email');
     if (!group) return next(new AppError('Group not found', 404));
@@ -68,6 +70,7 @@ exports.getGroupMembers = catchAsync(async (req, res, next) => {
         }
     });
 })
+
 exports.getMyGroups = catchAsync(async (req, res, next) => {
     const groups = await Group.find({ members: req.user.id }).populate('members', 'name email');
     if (!groups || groups.length === 0){
@@ -78,6 +81,19 @@ exports.getMyGroups = catchAsync(async (req, res, next) => {
         data: {
             groups
         }
+    });
+});
+
+exports.deleteGroup = catchAsync(async (req, res, next) => {
+    const group = await Group.findById(req.params.id);
+    if (!group) return next(new AppError('Group not found', 404));
+    if(!group.createdBy.equals(req.user.id)) {
+        return next(new AppError('Only the group creator can delete the group', 403));
+    }
+    await Group.findByIdAndDelete(req.params.id);
+    res.status(204).json({
+        status: 'success',
+        data: null
     });
 });
 
