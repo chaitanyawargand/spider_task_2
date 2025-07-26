@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
-const bcrypt= require('bcryptjs');
+const bcrypt = require('bcryptjs');
+const crypto = require('crypto');
 
 const userSchema = new mongoose.Schema({
     name:{
@@ -30,10 +31,29 @@ const userSchema = new mongoose.Schema({
             message:'Passwords are not the same!'
         },
     },
+    profilePicture: {
+        type: String,
+        default: 'default.jpg'
+    },
     friends:[{
         type: mongoose.Schema.ObjectId,
         ref: 'User',
         required: false
+    }],
+    friendRequests: [{
+        from: {
+            type: mongoose.Schema.ObjectId,
+            ref: 'User'
+        },
+        status: {
+            type: String,
+            enum: ['pending', 'accepted', 'rejected'],
+            default: 'pending'
+        },
+        createdAt: {
+            type: Date,
+            default: Date.now
+        }
     }],
     passwordChangedAt: Date,
     passwordResetToken: String,
