@@ -3,12 +3,14 @@ const morgan = require('morgan');
 const helmet = require('helmet');
 const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
-const userroutes=require('./routes/userRoutes');
-const grouproutes=require('./routes/groupRoutes');
 const AppError= require('./utils/appError')
-const globalErrorHandler=require('./controllers/errorcontroller')
 const app = express();
 
+const userroutes= require('./routes/userRoutes')
+const grouproutes= require('./routes/grouprouter')
+const expenseRoutes= require('./routes/expenseRoutes')
+const globalErrorHandler= require('./controllers/errorController')
+const friendroutes= require('./routes/friendRoutes')
 // Set security HTTP headers
 app.use(helmet());
 
@@ -16,6 +18,11 @@ app.use(helmet());
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }
+const cors = require('cors');
+app.use(cors({
+  origin: ['http://localhost:5173', 'http://localhost:3001'],
+  credentials: true
+}));
 app.use(express.json({ limit: '10kb' }));
 
 // Data sanitization
@@ -23,9 +30,10 @@ app.use(mongoSanitize());
 app.use(xss());
 
 // routes
-app.use('/api/v1/users', userroutes);
-app.use('	/api/v1/groups', grouproutes);
-
+app.use('/users', userroutes);
+app.use('/groups', grouproutes);
+app.use('/friend',friendroutes);
+app.use('/expenses',expenseRoutes);
 app.all('*', (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
 });
