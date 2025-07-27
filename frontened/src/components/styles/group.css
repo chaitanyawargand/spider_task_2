@@ -1,0 +1,155 @@
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(20, 20, 20, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+}
+
+.modal-content {
+  background: #fff;
+  padding: 30px;
+  border-radius: 14px;
+  width: 100%;
+  max-width: 500px;
+  position: relative;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+
+.close-btn {
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: #999;
+}
+
+h2 {
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.input-box {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.type-buttons {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+  flex-wrap: wrap;
+}
+
+.type-btn {
+  padding: 10px 14px;
+  border-radius: 20px;
+  border: 1px solid #aaa;
+  cursor: pointer;
+  background-color: #f1f1f1;
+  font-weight: 500;
+  transition: 0.2s;
+}
+
+.type-btn.selected {
+  background-color: #7950f2;
+  color: white;
+  border-color: #7950f2;
+}
+
+.create-btn,
+.view-group-btn {
+  margin-top: 10px;
+  padding: 12px 20px;
+  background-color: #7950f2;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  width: 100%;
+  transition: background-color 0.2s ease;
+}
+
+.create-btn:hover,
+.view-group-btn:hover {
+  background-color: #5936c4;
+}
+
+.group-success {
+  background-color: #dfffe0;
+  color: #266727;
+  padding: 10px 15px;
+  border-left: 5px solid #2fa84f;
+  margin-bottom: 15px;
+  border-radius: 6px;
+}
+
+.search-results {
+  max-height: 200px;
+  overflow-y: auto;
+  margin-bottom: 15px;
+  background: #fafafa;
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid #eee;
+}
+
+.search-item {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.search-item:hover {
+  background-color: #f3f3f3;
+}
+
+.search-item.added {
+  background-color: #dfffe0;
+  cursor: default;
+}
+
+.added-text {
+  color: green;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.selected-members {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.tag {
+  background-color: #e9ecef;
+  padding: 6px 10px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+}
+
+.remove-tag {
+  cursor: pointer;
+  color: #dc3545;
+  font-weight: bold;
+}
