@@ -1,0 +1,89 @@
+.profile-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+}
+
+.profile-card {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  padding: 30px 40px;
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+}
+
+.profile-avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  margin-bottom: 20px;
+  object-fit: cover;
+}
+
+.profile-info h2 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.profile-info p {
+  color: #666;
+  margin: 10px 0;
+}
+
+.profile-role {
+  display: inline-block;
+  margin-top: 10px;
+  font-size: 14px;
+  color: #fff;
+  background: #3f51b5;
+  padding: 4px 10px;
+  border-radius: 20px;
+}
+
+.edit-btn {
+  margin-top: 20px;
+  padding: 8px 16px;
+  background-color: #2196f3;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.edit-form input {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.edit-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+
+.edit-actions button {
+  flex: 1;
+  margin: 0 5px;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.edit-actions button:first-child {
+  background-color: #4caf50;
+  color: white;
+}
+
+.edit-actions button:last-child {
+  background-color: #f44336;
+  color: white;
+}
