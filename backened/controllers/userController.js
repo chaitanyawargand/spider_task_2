@@ -1,7 +1,6 @@
 const User = require('./../modals/userschema');
 const catchAsync = require('./../utils/catchAsynch');
 const AppError = require('./../utils/appError');
-const APIFeatures = require('./../utils/apiFeatures');
 const filterObj =(obj, ...allowedFields)=>{
   const newObj = {};
   Object.keys(obj).forEach(el => {
